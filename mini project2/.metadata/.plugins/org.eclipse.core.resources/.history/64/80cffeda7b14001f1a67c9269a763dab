@@ -1,0 +1,79 @@
+/*
+ * main.c
+ *
+ *  Created on: May 5, 2024
+ *      Author: Aya
+ */
+#include<avr/io.h>
+#include <util/delay.h> // for delay function
+
+//#define F_CPU8000000UL
+
+int main(){
+	/* Application initialization */
+	DDRC |= 0X0F;
+	DDRD |= (1<<PD4);
+
+	PORTC =0;
+	unsigned char increment = 0;
+	unsigned char flag = 0;
+
+	while(1){
+		/* Application code */
+		if(PORTD & (1<<PD4)){
+			_delay_ms(30);
+			if(PORTD & (1<<PD4)){
+				if(flag == 0){
+					increment++;
+					if(increment == 9){
+						increment = 0;
+					}
+					flag = 1;
+				}
+
+			}
+		}
+		else{
+			flag = 0;
+		}
+
+		switch(increment){
+		case 0:
+			PORTC = 0;
+			break;
+		case 1:
+			PORTC = 0x01;
+			break;
+		case 2:
+			PORTC = 0x02;
+			break;
+		case 3:
+			PORTC = 0x03;
+			break;
+		case 4:
+			PORTC = 0x04;
+			break;
+		case 5:
+			PORTC = 0x05;
+			break;
+		case 6:
+			PORTC = 0x06;
+			break;
+		case 7:
+			PORTC = 0x07;
+			break;
+		case 8:
+			PORTC = 0x08;
+			break;
+		case 9:
+			PORTC = 0x09;
+			break;
+
+		}
+
+
+
+	}
+
+}
+
